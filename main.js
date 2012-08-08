@@ -32,10 +32,6 @@ Bar.prototype.update = function(c){
 
 var colorWeight = [256,256,256];
 var init = function(){
-    g = new a();
-    g.timeToDeath = 9999;
-    
-    
     canvas = document.createElement("canvas");
     SX = window.innerWidth;
     SY = window.innerHeight;
@@ -43,7 +39,6 @@ var init = function(){
     canvas.height = SY;
     document.body.appendChild(canvas);
     context = canvas.getContext('2d');
-    context.fillStyle = "#000";
     
     canvas2 = document.createElement("canvas");
     canvas2.width = 200;
@@ -106,13 +101,14 @@ var init = function(){
         mouse.y = e.pageY;
         mouse.down = false;
     });
+    reset();
     setInterval(update,1000/60);
     
 };
 function reset(){
     g = new a();
     g.timeToDeath = 9999;
-    context.fillStyle = "#000";
+    context.fillStyle = "#131313";
     context.globalAlpha = 1;
     context.fillRect(0,0,SX,SY);
     currentChildren = 0;
