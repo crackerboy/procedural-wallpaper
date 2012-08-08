@@ -229,6 +229,9 @@ function update(){
         context2.fillStyle = "#fff";
         context2.fillText("Press space to reset",10,180);
     }
+    context.globalAlpha = .05;
+    context.fillStyle = "#fff";
+    context.fillText("By Severin Ibarluzea",10,SY-10);
 }
 window.onload = init;
 
