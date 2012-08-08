@@ -200,6 +200,23 @@ function update(){
         n.children = g.children;
         g = n;
     }
+    
+    if (mouse.down){
+        function dot(k){
+            var a = k.x - mouse.x + SX/2;
+            var b = k.y - mouse.y + SY/2;
+            var c = Math.sqrt(a*a+b*b);
+            if (c<300 && c!=0){
+                k.xs += a / (c*c) * 10;
+                k.ys += b / (c*c) * 10;
+            }
+        }
+        for (var i = 0;i<g.children.length;i++){
+            dot(g.children[i]);
+        }
+        dot(g);
+    }
+    
     context.restore();
     
     if (mouse.x > SX - 250 && mouse.y > SY - 250 && timeSinceMouse > 0){
