@@ -35,6 +35,7 @@ var init = function(){
     g = new a();
     g.timeToDeath = 9999;
     
+    
     canvas = document.createElement("canvas");
     SX = window.innerWidth;
     SY = window.innerHeight;
@@ -43,7 +44,6 @@ var init = function(){
     document.body.appendChild(canvas);
     context = canvas.getContext('2d');
     context.fillStyle = "#000";
-    
     
     canvas2 = document.createElement("canvas");
     canvas2.width = 200;
@@ -57,13 +57,20 @@ var init = function(){
     bars = [];
     
     var color = ["#f00","#0f0","#00f"];
-    for (var u = 0;u<3;u++){
-        var i = u;
-        bars.push(new Bar(color[i],function(x){
-            colorWeight[i] = x * 256;
-        }));
-        bars[bars.length - 1].p = 1;
-    }
+    
+    
+    bars.push(new Bar(color[0],function(x){
+        colorWeight[0] = x * 256;
+    }));
+    bars[bars.length - 1].p = 1;
+    bars.push(new Bar(color[1],function(x){
+        colorWeight[1] = x * 256;
+    }));
+    bars[bars.length - 1].p = 1;
+    bars.push(new Bar(color[2],function(x){
+        colorWeight[2] = x * 256;
+    }));
+    bars[bars.length - 1].p = 1;
     
     bars.push(new Bar("#aaa",function(x){
         maxChildren = 20 + (x*x) * (10000 - 20);
@@ -83,7 +90,6 @@ var init = function(){
         bars[i].x = 100;
         bars[i].y = i * 30 + 10;
     }
-    
     context.fillRect(0,0,SX,SY);
     
     addEventListener("mousemove",function(e){
@@ -100,6 +106,7 @@ var init = function(){
         mouse.y = e.pageY;
         mouse.down = false;
     });
+    setInterval(update,1000/60);
     
 };
 function reset(){
@@ -125,7 +132,7 @@ function randomBrightHex(){
     var red = Math.floor(Math.random() * colorWeight[0]);
     var blue = Math.floor(Math.random() * colorWeight[1]);
     var green = Math.floor(Math.random() * colorWeight[2]);
-    while(red!=255 || blue != 255 || green != 255){
+    while(red!=255 && blue != 255 && green != 255){
         red++;
         blue++;
         green++;
@@ -218,7 +225,5 @@ function getImage(){
 }
 
 window.addEventListener("keydown",function (e) { if (e.keyCode == 13){ getImage(); }else if(e.keyCode == 32){ setTimeout(reset,1000); } } );
-
-setInterval(update,1000/60);
 //setInterval(getImage,10000);
 //setInterval("window.location.reload(false);",1000 * 30);
